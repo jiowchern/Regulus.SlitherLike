@@ -1,0 +1,6 @@
+[submodule "Regulus.Miscellaneous"]
+	path = Regulus.Miscellaneous
+	url = https://github.com/jiowchern/Regulus.Miscellaneous.git
+[submodule "Regulus.Remote"]
+	path = Regulus.Remote
+	url = https://github.com/jiowchern/Regulus.Remote.git
