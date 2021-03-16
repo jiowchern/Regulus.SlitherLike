@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Regulus.Miscellaneous\Regulus.QuadTree\Regulus.QuadTree.csproj" />
+    <ProjectReference Include="..\..\..\Regulus.Remote\Regulus.Remote.Reactive\Regulus.Remote.Reactive.csproj" />
+    <ProjectReference Include="..\Regulus.SlitherLike.Logic.Common\Regulus.SlitherLike.Logic.Common.csproj" />
+    <ProjectReference Include="..\..\..\Regulus.Remote\Regulus.Remote\Regulus.Remote.csproj" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,8 @@
+
+<Project>
+    <Target Condition="'$(ProjectName)' == 'Regulus.SlitherLike.Logic.Common' And '$(SolutionDir)' != '*Undefined*'" Name="CreateProtocol" AfterTargets="Build">
+            <Exec Command = "del $(SolutionDir)Regulus.SlitherLike.Logic.Protocol\*.cs /q" />     
+             <Exec Command = "dotnet run --project $(SolutionDir)..\..\Regulus.Remote\Regulus.Application.Protocol.CodeWriter  --common $(TargetPath) --output $(SolutionDir)Regulus.SlitherLike.Logic.Protocol" />      
+          </Target>
+      </Project>
+      
