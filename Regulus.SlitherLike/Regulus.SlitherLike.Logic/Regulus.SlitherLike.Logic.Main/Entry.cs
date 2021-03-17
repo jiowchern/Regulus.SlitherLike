@@ -14,8 +14,10 @@ namespace Regulus.SlitherLike.Logic.Main
 
         public Entry()
         {
-            _World = new World();
+            var world = new World();
+            _World = world;
             _Users = new Utility.Updater();
+            _Users.Add(world);
             _Runner = new ThreadUpdater(_Update);
             _Runner.Start();
         }
@@ -33,6 +35,7 @@ namespace Regulus.SlitherLike.Logic.Main
         void IDisposable.Dispose()
         {
             _Runner.Stop();
+            _Users.Shutdown();
         }
     }
 }

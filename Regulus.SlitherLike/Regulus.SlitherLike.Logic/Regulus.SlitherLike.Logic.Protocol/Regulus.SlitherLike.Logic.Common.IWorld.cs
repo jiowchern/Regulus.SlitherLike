@@ -75,6 +75,8 @@
                 
 
 
+                    public Regulus.Remote.Property<System.Int64> _Frames= new Regulus.Remote.Property<System.Int64>();
+                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IWorld.Frames { get{ return _Frames;} }
 
             
         }

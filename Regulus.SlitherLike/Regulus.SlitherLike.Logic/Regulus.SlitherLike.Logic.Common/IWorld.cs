@@ -4,6 +4,6 @@
     public interface IWorld
     {        
         Regulus.Remote.Value<IPlayer> Create(string name);
-        
+        Regulus.Remote.Property<long> Frames { get; }
     }
 }

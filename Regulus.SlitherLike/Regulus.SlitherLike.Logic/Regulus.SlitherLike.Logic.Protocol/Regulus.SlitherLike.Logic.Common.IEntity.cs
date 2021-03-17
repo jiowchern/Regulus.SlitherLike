@@ -64,17 +64,20 @@
                     public Regulus.Remote.Property<System.Int64> _Id= new Regulus.Remote.Property<System.Int64>();
                     Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IEntity.Id { get{ return _Id;} }
 
-                    public Regulus.Remote.Property<System.Int64> _Tick= new Regulus.Remote.Property<System.Int64>();
-                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IEntity.Tick { get{ return _Tick;} }
+                    public Regulus.Remote.Property<System.Int64> _Owner= new Regulus.Remote.Property<System.Int64>();
+                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IEntity.Owner { get{ return _Owner;} }
+
+                    public Regulus.Remote.Property<System.Int64> _Frames= new Regulus.Remote.Property<System.Int64>();
+                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IEntity.Frames { get{ return _Frames;} }
 
                     public Regulus.Remote.Property<Regulus.Utility.Vector2> _Position= new Regulus.Remote.Property<Regulus.Utility.Vector2>();
                     Regulus.Remote.Property<Regulus.Utility.Vector2> Regulus.SlitherLike.Logic.Common.IEntity.Position { get{ return _Position;} }
 
-                    public Regulus.Remote.Property<Regulus.Utility.Vector2> _Direction= new Regulus.Remote.Property<Regulus.Utility.Vector2>();
-                    Regulus.Remote.Property<Regulus.Utility.Vector2> Regulus.SlitherLike.Logic.Common.IEntity.Direction { get{ return _Direction;} }
+                    public Regulus.Remote.Property<System.Single> _Speed= new Regulus.Remote.Property<System.Single>();
+                    Regulus.Remote.Property<System.Single> Regulus.SlitherLike.Logic.Common.IEntity.Speed { get{ return _Speed;} }
 
-                    public Regulus.Remote.Property<Regulus.Utility.Vector2> _Rotation= new Regulus.Remote.Property<Regulus.Utility.Vector2>();
-                    Regulus.Remote.Property<Regulus.Utility.Vector2> Regulus.SlitherLike.Logic.Common.IEntity.Rotation { get{ return _Rotation;} }
+                    public Regulus.Remote.Property<System.Single> _Rotation= new Regulus.Remote.Property<System.Single>();
+                    Regulus.Remote.Property<System.Single> Regulus.SlitherLike.Logic.Common.IEntity.Rotation { get{ return _Rotation;} }
 
             
         }

@@ -1,49 +1,73 @@
 ﻿using Regulus.Remote;
 using Regulus.SlitherLike.Logic.Common;
 using Regulus.Utility;
-using System.Collections.Generic;
+using System;
 
 namespace Regulus.SlitherLike.Logic.Main
 {
-    internal class World : IWorld , IVision , ILandlordProviable<long> 
+    internal class World : IWorld , Regulus.Utility.IUpdatable  
     {
-        long _Ids;
-        readonly Regulus.Remote.Landlord<long> _IdProvider;
+        readonly Time _Time;
         readonly Regulus.Utility.Updater _Players;
-        readonly Regulus.Collection.QuadTree<IMapNode> _QuadTree;
+        readonly Map _Map;
+
+        int _UpdateFramesCount;
+        readonly Property<long>  _Frames;
+        Property<long> IWorld.Frames => _Frames;
+
         public World()
         {
-            _IdProvider = new Landlord<long>(this);
-            _QuadTree = new Collection.QuadTree<IMapNode>(new Size(1,1) , 1000);
+            _Time = new Time();
+            _Map = new Map();
             _Players = new Utility.Updater();
         }
 
         Value<IPlayer> IWorld.Create(string name)
         {
-
-            var entiry = new Entity(_IdProvider.Rent());
-
-            _QuadTree.Insert(entiry);
-
-            var player = new Player(entiry, this);
+            var player = new Player(name , _Map, _Time);
             
             _Players.Add(player);
-            // todo 開始處理移動相關邏輯
+            
             return player;
         }
+        
 
-        IEnumerable<IEntityController> IVision.Query(Rect rect)
+        bool IUpdatable.Update()
         {
-            var controllers = _QuadTree.Query(rect);
-            foreach (var contorller in controllers)
+            if(!_Time.Advance())
             {
-                yield return contorller;
+                return true;
+            }
+            
+            _Players.Working();
+            _Map.Update(_Time);
+            _UpdateFrames(_Time);
+            return true;
+        }
+
+        private void _UpdateFrames(ITime time)
+        {
+            
+            if(_UpdateFramesCount == 0)
+            {
+                _Frames.Value = time.Frames;
+                _UpdateFramesCount = 10;
+            }
+            else
+            {
+                _UpdateFramesCount--;
             }
         }
 
-        long ILandlordProviable<long>.Spawn()
+        void IBootable.Launch()
         {
-            return ++_Ids;
+            
+        }
+
+        void IBootable.Shutdown()
+        {
+            _Players.Shutdown();
+
         }
     }
 }

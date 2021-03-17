@@ -70,13 +70,28 @@
                 }
 
                 
+ 
+
+                void Regulus.SlitherLike.Logic.Common.IPlayer.SetDirection(Regulus.SlitherLike.Logic.Common.DIRECTION _1)
+                {                    
+
+                    Regulus.Remote.IValue returnValue = null;
+                    var info = typeof(Regulus.SlitherLike.Logic.Common.IPlayer).GetMethod("SetDirection");
+                    _CallMethodEvent(info , new object[] {_1} , returnValue);                    
+                    
+                }
+
+                
 
 
-                    public Regulus.Remote.Property<System.Int64> _Main= new Regulus.Remote.Property<System.Int64>();
-                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IPlayer.Main { get{ return _Main;} }
+                    public Regulus.Remote.Property<System.Int64> _Id= new Regulus.Remote.Property<System.Int64>();
+                    Regulus.Remote.Property<System.Int64> Regulus.SlitherLike.Logic.Common.IPlayer.Id { get{ return _Id;} }
 
-                    public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController> _Entities= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController>();
-                    Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController> Regulus.SlitherLike.Logic.Common.IPlayer.Entities { get{ return _Entities;} }
+                    public Regulus.Remote.Property<System.String> _Name= new Regulus.Remote.Property<System.String>();
+                    Regulus.Remote.Property<System.String> Regulus.SlitherLike.Logic.Common.IPlayer.Name { get{ return _Name;} }
+
+                    public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity> _Entities= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity>();
+                    Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity> Regulus.SlitherLike.Logic.Common.IPlayer.Entities { get{ return _Entities;} }
 
             
         }

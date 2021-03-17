@@ -15,12 +15,11 @@ namespace Regulus.SlitherLike.Logic.Main
         Remote.Notifier<ILogin> IUser.Logins => new Remote.Notifier<ILogin>(_Logins);
 
 
-        readonly NotifiableCollection<IEntity> _Entities;
-        Remote.Notifier<IEntity> IUser.Entities => new Remote.Notifier<IEntity>(_Entities);
+        
 
 
-        readonly NotifiableCollection<IEntityController> _Controllers;
-        Remote.Notifier<IEntityController> IUser.Controllers => new Remote.Notifier<IEntityController>(_Controllers);
+        readonly NotifiableCollection<IPlayer> _Players;
+        Remote.Notifier<IPlayer> IUser.Players => new Remote.Notifier<IPlayer>(_Players);
 
         readonly NotifiableCollection<IPlay> _Plays;
         Remote.Notifier<IPlay> IUser.Plays => new Remote.Notifier<IPlay>(_Plays);
@@ -29,8 +28,8 @@ namespace Regulus.SlitherLike.Logic.Main
         {
             _World = world;
             _Plays = new NotifiableCollection<IPlay>();
-            _Controllers = new NotifiableCollection<IEntityController>();
-            _Entities = new NotifiableCollection<IEntity>();
+            _Players = new NotifiableCollection<IPlayer>();
+            
             _Logins = new NotifiableCollection<ILogin>();
             _Enable = true;
             binder.BreakEvent += () => _Enable = false;
@@ -52,9 +51,9 @@ namespace Regulus.SlitherLike.Logic.Main
             _Machine.Push(status);
         }
 
-        private void _ToPlay(IPlayer zone)
+        private void _ToPlay(IPlayer player)
         {
-            var status = new UserPlay(zone , _Entities.Items , _Controllers.Items, _Plays.Items );
+            var status = new UserPlay(player, _Players.Items, _Plays.Items, _World);
             status.DoneEvent += _ToLogin;
             _Machine.Push(status);
         }

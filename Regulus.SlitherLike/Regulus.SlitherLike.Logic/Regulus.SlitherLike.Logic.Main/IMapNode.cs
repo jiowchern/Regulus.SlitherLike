@@ -2,8 +2,10 @@
 
 namespace Regulus.SlitherLike.Logic.Main
 {
-    internal interface IMapNode : IEntityController , Collection.IQuadObject
+    public interface IMapNode : IEntity, Collection.IQuadObject
     {
-
+        void SetRotation(long frames, float rot);
+        void Advance(long frames);
+        
     }
 }

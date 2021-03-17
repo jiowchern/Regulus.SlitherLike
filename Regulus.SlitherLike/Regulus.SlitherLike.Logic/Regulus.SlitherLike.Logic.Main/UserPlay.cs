@@ -5,80 +5,53 @@ using System.Collections.Generic;
 using System.Reactive.Linq;
 using Regulus.Remote.Reactive;
 using System;
+using Regulus.Remote;
 
 namespace Regulus.SlitherLike.Logic.Main
 {
     internal class UserPlay : Regulus.Utility.IStatus , Common.IPlay
     {
         private readonly long _Id;
-        private readonly ICollection<IPlay> _Plays;
-        private readonly ICollection<IEntity> _Entities;
-        private readonly ICollection<IEntityController> _Controllers;
-        private readonly IPlayer _Zone;
+        private readonly ICollection<IPlay> _Plays;        
+        private readonly ICollection<IPlayer> _Players;
+        private readonly IPlayer _Player;
+        readonly IWorld _World;
         readonly System.Reactive.Disposables.CompositeDisposable _Disposables;
+
+        Property<long> IPlay.Frames => _World.Frames;
 
         public event System.Action DoneEvent;
         public UserPlay(
-            IPlayer zone,
-            ICollection<IEntity> entities, 
-            ICollection<IEntityController> controllers,
-            ICollection<IPlay> plays
+            IPlayer player,            
+            ICollection<IPlayer> players,
+            ICollection<IPlay> plays,
+            IWorld world
             )
         {
-            _Id = zone.Main.Value;
-            _Plays = plays;
-            _Zone = zone;            
-            _Entities = entities; 
-            _Controllers = controllers;            
+            _World = world;
+            _Player = player;
+            _Plays = plays;                     
+            _Players = players;            
             _Disposables = new System.Reactive.Disposables.CompositeDisposable();
         }
 
         void IStatus.Enter()
         {
             _Plays.Add(this);
-            _SetupEntiry();
-            _SetupController();
-
+            _Players.Add(_Player);
         }
 
-        private void _SetupEntiry()
-        {
-            _Entities.Clear();
-
-            var addControllerObs = from entity in _Zone.Entities.SupplyEvent()                                   
-                                   select entity;
-
-            _Disposables.Add(addControllerObs.Subscribe(s=>_Entities.Add(s)));
-
-            var removeControllerObs = from entity in _Zone.Entities.UnsupplyEvent()                                      
-                                      select entity;
-
-            _Disposables.Add(removeControllerObs.Subscribe(s => _Entities.Remove(s)));
-        }
         
-        private void _SetupController()
-        {
-            _Controllers.Clear();
-
-            var addControllerObs = from entity in _Zone.Entities.SupplyEvent()
-                                   where entity.Id.Value == _Id
-                                   select entity;
-
-            _Disposables.Add(addControllerObs.Subscribe(_Controllers.Add));
-
-            var removeControllerObs = from entity in _Zone.Entities.UnsupplyEvent()
-                                      where entity.Id.Value == _Id
-                                      select entity;
-
-            _Disposables.Add(removeControllerObs.Subscribe(s => _Controllers.Remove(s)));
-        }
+        
+        
 
 
         void IStatus.Leave()
         {
             _Disposables.Clear();
+            _Players.Remove(_Player);
             _Plays.Remove(this);
-            _Zone.Exit();
+            _Player.Exit();
         }
 
         void IStatus.Update()

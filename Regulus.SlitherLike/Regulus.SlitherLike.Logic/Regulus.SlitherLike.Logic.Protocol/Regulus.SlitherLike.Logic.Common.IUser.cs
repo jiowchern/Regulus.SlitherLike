@@ -67,11 +67,8 @@
                     public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlay> _Plays= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlay>();
                     Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlay> Regulus.SlitherLike.Logic.Common.IUser.Plays { get{ return _Plays;} }
 
-                    public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity> _Entities= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity>();
-                    Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntity> Regulus.SlitherLike.Logic.Common.IUser.Entities { get{ return _Entities;} }
-
-                    public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController> _Controllers= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController>();
-                    Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IEntityController> Regulus.SlitherLike.Logic.Common.IUser.Controllers { get{ return _Controllers;} }
+                    public Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlayer> _Players= new Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlayer>();
+                    Regulus.Remote.Notifier<Regulus.SlitherLike.Logic.Common.IPlayer> Regulus.SlitherLike.Logic.Common.IUser.Players { get{ return _Players;} }
 
             
         }

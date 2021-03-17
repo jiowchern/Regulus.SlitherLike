@@ -2,30 +2,50 @@
 using Regulus.SlitherLike.Logic.Common;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Regulus.SlitherLike.Logic.Main
 {
     internal class Player : IPlayer , Regulus.Utility.IUpdatable
     {
-        readonly IEntityController _Main;
-        private readonly IVision _Vision;
-        bool _Enable;
+        const float TurnLeft = 500f;
+        const float TurnRight = -500f;
+        const float TurnStop = 0f;        
+        
 
-        public Player(IEntityController main, IVision vision)
+        readonly static IdProvider _IdProvider = new IdProvider();
+        long _Id;
+        readonly string _Name;
+        private readonly IMap _Map;
+        bool _Enable;
+        DIRECTION _Direction;
+        readonly ITime _Time;
+        public Player(string name,IMap map,ITime time)
         {
-            _Main = main;
-            _Vision = vision;
-            _Entities = new NotifiableCollection<IEntityController>();
-            _DifferenceNotifier = new Collection.DifferenceNotifier<IEntityController>();
+            _Time = time;
+            _Id = _IdProvider.Provider.Rent();
+            _Name = name;
+            _Map = map;
+            _Entities = new NotifiableCollection<IEntity>();
+            _Owns = new NotifiableCollection<IMapNode>();
+            _DifferenceNotifier = new Collection.DifferenceNotifier<IEntity>();
+        }
+        ~Player()
+        {
+            _IdProvider.Provider.Return(_Id);
         }
 
+        readonly Regulus.Remote.NotifiableCollection<IEntity> _Entities;
+        Notifier<IEntity> IPlayer.Entities => new Notifier<IEntity>(_Entities);
 
-        Property<long> IPlayer.Main => new Property<long>(_Main.Id);
+        readonly Regulus.Remote.NotifiableCollection<IMapNode> _Owns;        
 
-        readonly Regulus.Remote.NotifiableCollection<IEntityController> _Entities;
-        Notifier<IEntityController> IPlayer.Entities => new Notifier<IEntityController>(_Entities);
+        
+        Property<string> IPlayer.Name => new Property<string>(_Name);
 
-        readonly Collection.DifferenceNotifier<IEntityController> _DifferenceNotifier;
+        Property<long> IPlayer.Id => new Property<long>(_Id);
+
+        readonly Collection.DifferenceNotifier<IEntity> _DifferenceNotifier;
         void IPlayer.Exit()
         {
             _Enable = false;
@@ -33,8 +53,17 @@ namespace Regulus.SlitherLike.Logic.Main
 
         bool Utility.IUpdatable.Update()
         {
-            var rect = new Regulus.Utility.Rect(new Regulus.Utility.Point(_Main.Position.Value.X, _Main.Position.Value.Y), new Regulus.Utility.Size(10, 10));
-            var entitys = _Vision.Query(rect);
+            var head = _Owns.Items.First();
+            if(_Direction == DIRECTION.LEFT)
+                head.SetRotation(_Time.Frames , TurnLeft);
+            else if (_Direction == DIRECTION.RIGHT)
+                head.SetRotation(_Time.Frames,TurnRight);
+            else if (_Direction == DIRECTION.NONE)
+                head.SetRotation(_Time.Frames,TurnStop);
+
+
+            var rect = new Regulus.Utility.Rect(new Regulus.Utility.Point(head.Position.Value.X, head.Position.Value.Y), new Regulus.Utility.Size(10, 10));
+            var entitys = _Map.Query(rect);
             _DifferenceNotifier.Set(entitys);
             return _Enable;
         }
@@ -42,21 +71,29 @@ namespace Regulus.SlitherLike.Logic.Main
         void Utility.IBootable.Launch()
         {
             _Enable = true;
+
+
+            var entity = new Entity(_Id);
+            _Owns.Items.Add(entity);
+            _Map.Join(entity);
+
+
             _DifferenceNotifier.JoinEvent += _Join;
             _DifferenceNotifier.LeaveEvent+= _Leave;
         }
 
         void Utility.IBootable.Shutdown()
         {
-            
-            _DifferenceNotifier.Set(new IEntityController[0]);
+            _Map.Leave(_Owns.First());
+            _Owns.Items.Clear();
+            _DifferenceNotifier.Set(new IEntity[0]);
             _DifferenceNotifier.JoinEvent -= _Join;
             _DifferenceNotifier.LeaveEvent -= _Leave;
             _Entities.Items.Clear();
             _Enable = false;
         }
 
-        private void _Leave(IEnumerable<IEntityController> instances)
+        private void _Leave(IEnumerable<IEntity> instances)
         {
             foreach (var instance in instances)
             {
@@ -64,7 +101,7 @@ namespace Regulus.SlitherLike.Logic.Main
             }
         }
 
-        private void _Join(IEnumerable<IEntityController> instances)
+        private void _Join(IEnumerable<IEntity> instances)
         {
             foreach (var instance in instances)
             {
@@ -72,6 +109,9 @@ namespace Regulus.SlitherLike.Logic.Main
             }
         }
 
-        
+        void IPlayer.SetDirection(DIRECTION dir)
+        {
+            _Direction = dir;
+        }
     }
 }

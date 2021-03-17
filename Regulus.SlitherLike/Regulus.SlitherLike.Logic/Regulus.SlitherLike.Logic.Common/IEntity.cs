@@ -6,10 +6,12 @@ namespace Regulus.SlitherLike.Logic.Common
     public interface IEntity
     {
         Regulus.Remote.Property<long> Id { get; }
-        Regulus.Remote.Property<long> Tick { get; }
-        Regulus.Remote.Property<Utility.Vector2> Position { get; }        
-        Regulus.Remote.Property<Utility.Vector2> Direction { get; }
-        Regulus.Remote.Property<Utility.Vector2> Rotation { get; }
 
+        Regulus.Remote.Property<long> Owner { get; } 
+        Regulus.Remote.Property<long> Frames { get; }
+        Regulus.Remote.Property<Utility.Vector2> Position { get; }        
+        Regulus.Remote.Property<float> Speed { get; }
+        Regulus.Remote.Property<float> Rotation { get; }
+        
     }
 }
