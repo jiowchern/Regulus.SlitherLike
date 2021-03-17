@@ -17,8 +17,8 @@ namespace Regulus.SlitherLike.Logic.Main
         long _Id;
         readonly string _Name;
         private readonly IMap _Map;
-        bool _Enable;
-        DIRECTION _Direction;
+        bool _Enable;        
+        DIRECTION? _Direction;
         readonly ITime _Time;
         public Player(string name,IMap map,ITime time)
         {
@@ -60,7 +60,7 @@ namespace Regulus.SlitherLike.Logic.Main
                 head.SetRotation(_Time.Frames,TurnRight);
             else if (_Direction == DIRECTION.NONE)
                 head.SetRotation(_Time.Frames,TurnStop);
-
+            _Direction = null;
 
             var rect = new Regulus.Utility.Rect(new Regulus.Utility.Point(head.Position.Value.X, head.Position.Value.Y), new Regulus.Utility.Size(10, 10));
             var entitys = _Map.Query(rect);
