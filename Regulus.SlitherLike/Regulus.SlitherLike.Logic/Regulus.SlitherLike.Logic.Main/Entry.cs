@@ -5,7 +5,7 @@ using System;
 namespace Regulus.SlitherLike.Logic.Main
 { 
     
-    public class Entry : Regulus.Remote.IEntry , System.IDisposable
+    public class Entry : Regulus.Remote.IEntry , System.IDisposable 
     {
     
         readonly Regulus.Utility.Updater _Users;

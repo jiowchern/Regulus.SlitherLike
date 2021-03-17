@@ -33,9 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regulus.SlitherLike.Logic.P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regulus.QuadTree", "..\..\Regulus.Miscellaneous\Regulus.QuadTree\Regulus.QuadTree.csproj", "{34EC70BD-0F3F-4F33-97CB-24585C011632}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regulus.SlitherLike.Logic.Tests", "Regulus.SlitherLike.Logic.Tests\Regulus.SlitherLike.Logic.Tests.csproj", "{D90C77BA-D078-4620-905B-9DE11F108976}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regulus.SlitherLike.Logic.Tests", "Regulus.SlitherLike.Logic.Tests\Regulus.SlitherLike.Logic.Tests.csproj", "{D90C77BA-D078-4620-905B-9DE11F108976}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Regulus.Remote.Reactive", "..\..\Regulus.Remote\Regulus.Remote.Reactive\Regulus.Remote.Reactive.csproj", "{53FBD9C8-F000-444E-9212-39DE0F0990FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Regulus.SlitherLike.Logic.Server", "Regulus.SlitherLike.Logic.Server\Regulus.SlitherLike.Logic.Server.csproj", "{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -239,6 +241,18 @@ Global
 		{53FBD9C8-F000-444E-9212-39DE0F0990FB}.Release|x64.Build.0 = Release|Any CPU
 		{53FBD9C8-F000-444E-9212-39DE0F0990FB}.Release|x86.ActiveCfg = Release|Any CPU
 		{53FBD9C8-F000-444E-9212-39DE0F0990FB}.Release|x86.Build.0 = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|x64.Build.0 = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Debug|x86.Build.0 = Debug|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|x64.ActiveCfg = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|x64.Build.0 = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|x86.ActiveCfg = Release|Any CPU
+		{A79DE3FD-E198-460F-8C18-EAB12F4BBAEE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

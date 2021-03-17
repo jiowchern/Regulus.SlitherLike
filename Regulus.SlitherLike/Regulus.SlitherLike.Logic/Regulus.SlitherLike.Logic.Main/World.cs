@@ -20,6 +20,7 @@ namespace Regulus.SlitherLike.Logic.Main
             _Time = new Time();
             _Map = new Map();
             _Players = new Utility.Updater();
+            _Frames = new Property<long>();
         }
 
         Value<IPlayer> IWorld.Create(string name)
