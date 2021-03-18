@@ -27,8 +27,15 @@ namespace Regulus.SlitherLike.Unity
             observer.OnCompleted();
         }
 
-        
 
+        public static IObservable<TGpi> SupplyEvent<TGpi>(this Regulus.Remote.Notifier<TGpi> notifier)
+        {
+            return Observable.FromEvent<TGpi>(h=> notifier.Base.Supply += h , h => notifier.Base.Supply -= h);
+        }
+        public static IObservable<TGpi> UnsupplyEvent<TGpi>(this Regulus.Remote.Notifier<TGpi> notifier)
+        {
+            return Observable.FromEvent<TGpi>(h => notifier.Base.Unsupply += h, h => notifier.Base.Unsupply -= h);
+        }
         public static IObservable<TGpi> Supply<TGpi>(this IObservable<Regulus.Remote.INotifierQueryable> observable)
         {
             return observable.ContinueWith(_Supply<TGpi>);

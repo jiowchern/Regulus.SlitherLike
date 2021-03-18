@@ -62,7 +62,7 @@ namespace Regulus.SlitherLike.Logic.Main
                 head.SetRotation(_Time.Frames,TurnStop);
             _Direction = null;
 
-            var rect = new Regulus.Utility.Rect(new Regulus.Utility.Point(head.Position.Value.X, head.Position.Value.Y), new Regulus.Utility.Size(10, 10));
+            var rect = new Regulus.Utility.Rect(new Regulus.Utility.Point(head.Position.X, head.Position.Y), new Regulus.Utility.Size(10, 10));
             var entitys = _Map.Query(rect);
             _DifferenceNotifier.Set(entitys);
             return _Enable;

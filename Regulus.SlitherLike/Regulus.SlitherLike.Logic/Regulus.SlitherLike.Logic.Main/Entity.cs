@@ -49,6 +49,8 @@ namespace Regulus.SlitherLike.Logic.Main
 
         Property<long> IEntity.Owner => new Property<long>(Owner);
 
+        Vector2 IMapNode.Position => _Bounds.Center.ToVector2();
+
         event System.Action<IQuadObject> _BoundsChanged;
         event System.Action<IQuadObject> IQuadObject.BoundsChanged
         {
