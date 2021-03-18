@@ -1,0 +1,2 @@
+dotnet publish .\Regulus.SlitherLike.Logic\Regulus.SlitherLike.Logic.Protocol\Regulus.SlitherLike.Logic.Protocol.csproj -o .\Regulus.SlitherLike.Unity\Assets\Project\Plugins\Logic
+dotnet publish ..\Regulus.Remote\Regulus.Remote.Client -o .\Regulus.SlitherLike.Unity\Assets\Project\Plugins\Logic
